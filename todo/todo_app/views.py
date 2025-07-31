@@ -33,9 +33,9 @@ class AListView(APIView):
         serializer = ListAllSerializer(list)
         return Response(serializer.data, status.HTTP_200_OK)
     
-    def put(self, response, id):
+    def put(self, request, id):
         list = self.fetch_list(id)
-        serializer = ListAllSerializer(list, data=response.data, partial=True)
+        serializer = ListAllSerializer(list, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
@@ -149,3 +149,5 @@ class ASubtaskView(APIView):
 
         subtask.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
